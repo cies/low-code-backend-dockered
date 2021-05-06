@@ -1,0 +1,7 @@
+meili/data.ms
+postgres/db_data
+.idea/
+*.kate-swp
+nginx-le/ssl
+frontend-dist/
+*.log

@@ -1,0 +1,4 @@
+- "!include public_post_status.yaml"
+- "!include public_posts.yaml"
+- "!include public_posts_tags.yaml"
+- "!include public_tags.yaml"

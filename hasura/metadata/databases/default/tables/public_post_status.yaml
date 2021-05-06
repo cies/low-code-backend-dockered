@@ -1,0 +1,19 @@
+table:
+  name: post_status
+  schema: public
+is_enum: true
+array_relationships:
+- name: posts
+  using:
+    foreign_key_constraint_on:
+      column: status
+      table:
+        name: posts
+        schema: public
+select_permissions:
+- permission:
+    columns:
+    - value
+    - comment
+    filter: {}
+  role: guest

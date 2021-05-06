@@ -1,0 +1,19 @@
+table:
+  name: tags
+  schema: public
+array_relationships:
+- name: posts_tags
+  using:
+    foreign_key_constraint_on:
+      column: tag_id
+      table:
+        name: posts_tags
+        schema: public
+select_permissions:
+- permission:
+    columns:
+    - id
+    - name
+    - comment
+    filter: {}
+  role: guest

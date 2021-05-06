@@ -1,0 +1,83 @@
+version: '3.6'
+services:
+
+  nginx:
+    image: nginx:latest
+    hostname: nginx
+    restart: always
+    ports:
+      - "3030:80"
+    depends_on:
+      - "hasura"
+    volumes:
+      - ./frontend/dist:/frontend-dist
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/error.log:/etc/nginx/error_log.log
+
+  frontend:
+    image: frontend
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - "hasura"
+    volumes:
+      - ./frontend:/frontend:delegated
+      - node_modules_volume:/frontend/node_modules
+
+  elm-graphql-generator:
+    image: node:15.14.0-alpine3.13
+    volumes:
+      - ./frontend/src/HasuraClient:/output/HasuraClient
+    depends_on:
+      - "hasura"
+
+  hasura:
+    image: hasura/graphql-engine:v2.0.0-alpha.7.cli-migrations-v3
+    ports:
+      - "8080:8080"
+      - "9695:9695"
+      - "9693:9693"
+    depends_on:
+      - "postgres"
+    volumes:
+      - ./hasura:/hasura
+      - ./hasura/migrations:/hasura-migrations
+      - ./hasura/metadata:/hasura-metadata
+    restart: always
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgres@postgres:5432/postgres
+      # disable the regular console, use the CLI console instead (see Makefile) as it creates migrations
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "false"
+      # enable debugging mode. It is recommended to disable this in production
+      HASURA_GRAPHQL_DEV_MODE: "true"
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: "guest"
+      HASURA_GRAPHQL_ADMIN_SECRET: "adminsecret"
+
+  postgres:
+    image: postgres:12
+    hostname: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres/db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgres
+
+  meili:
+    image: getmeili/meilisearch:v0.19.0rc4
+    hostname: meili
+    restart: always
+    volumes:
+      - ./meili/data.ms:/data.ms
+    ports:
+      - "7700:7700"
+    environment:
+      # needed during index population
+      MEILI_HTTP_PAYLOAD_SIZE_LIMIT: 212715200
+
+volumes:
+  node_modules_volume:

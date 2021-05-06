@@ -1,0 +1,17 @@
+table:
+  name: posts_tags
+  schema: public
+object_relationships:
+- name: post
+  using:
+    foreign_key_constraint_on: post_id
+- name: tag
+  using:
+    foreign_key_constraint_on: tag_id
+select_permissions:
+- permission:
+    columns:
+    - post_id
+    - tag_id
+    filter: {}
+  role: guest

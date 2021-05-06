@@ -1,0 +1,27 @@
+# generated Elm GraphQL client library
+src/HasuraClient
+
+# elm-package generated files
+elm-stuff/
+
+# elm-repl generated files
+repl-temp-*
+
+# nodejs stuff
+build/Release
+node_modules/
+.npm
+yarn.lock
+.node_repl_history
+
+# editor and OS stuff
+.DS_Store
+.idea
+ignore
+dist
+tests/VerifyExamples
+
+# logs
+logs
+*.log
+npm-debug.log*
