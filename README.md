@@ -113,6 +113,7 @@ Interesting ways to extend this setup?
  * Add [MeiliSearch](https://www.meilisearch.com) as service that sits behind Hasura's "remote schema".
  * Describe how running Elm tests would work in this setup.
  * Use the `RemoteData` package.
+ * Make Webpack regenerate the GraphQL client for us on change/ on production build
  * Make sure this works on MacOS and Windows.
  * Improve the performance even further
    * Possibly with server-side prerendering, for which we have to pick an approach:
