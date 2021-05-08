@@ -51,7 +51,7 @@ This repo contains the following parts:
 
 Assuming you have `docker`, `docker-compose` and `make` installed, let's go!
 
-Start by running Postres and Hasura with:
+Start by running Postgres and Hasura with:
 
     docker-compose up hasura
 
@@ -74,14 +74,14 @@ The `posts` also have a `status` that is modelled with what Hasura calls an "enu
 
 The following command is used to generate the 100% type safe GraphQL client:
 
-    make generate-elm-client 
+    make generate-elm-graphql-client 
 
 The code will be put in `/frontend/src/HasuraClient` which is *not* checked into version control,
 as it can be re-generated at any time (and needs to be regenerated on schema changes) using the command above.
 
 The following command runs development-mode Webpack in the `/frontend` container:
 
-    docker-compose up hasura 
+    docker-compose up frontend 
 
 It proxies request for the `hasura` container (`/v1/graphql`)
 and watches filesystem on the host for changes in the `/frontend` directory which will be hot-reloaded to the browser on:
