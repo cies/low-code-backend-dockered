@@ -110,7 +110,7 @@ Interesting ways to extend this setup?
 
  * Add a [hasura-backend-plus](https://nhost.github.io/hasura-backend-plus) service and some basic (or not so basic) authentication/authorization system.
  * Add React Admin with [ra-data-hasura](https://github.com/hasura/ra-data-hasura) as a better place to manage data than through Hasura's console.
- * Add [MeiliSearch](https://www.meilisearch.com) as service that sits behind Hasura's "remote schema".
+ * Add fulltext search with [pgGroonga](https://github.com/pgroonga/docker) and Hasura's [tracked custom queries](https://duckduckgo.com/?q=hasura+fulltext+search)
  * Describe how running Elm tests would work in this setup.
  * Use the `RemoteData` package.
  * Make Webpack regenerate the GraphQL client for us on change/ on production build
