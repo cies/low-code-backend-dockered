@@ -59,8 +59,8 @@ services:
       HASURA_GRAPHQL_ADMIN_SECRET: "adminsecret"
 
   postgres:
-    image: postgres:12
     hostname: postgres
+    build: postgres/.
     restart: always
     init: true  # to speed up shutting down
     ports:
@@ -69,18 +69,29 @@ services:
       - ./postgres/db_data:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: postgres
+    depends_on:
+      - "elasticsearch"
 
-  meili:
-    image: getmeili/meilisearch:v0.19.0rc4
-    hostname: meili
-    restart: always
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.14.0
+    ports: 
+    - "9200:9200"
+    - "9300:9300"
     volumes:
-      - ./meili/data.ms:/data.ms
-    ports:
-      - "7700:7700"
+      - ./elasticsearch/data:/usr/share/elasticsearch/data
     environment:
-      # needed during index population
-      MEILI_HTTP_PAYLOAD_SIZE_LIMIT: 212715200
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    cap_add:
+      - IPC_LOCK
 
 volumes:
   node_modules_volume:

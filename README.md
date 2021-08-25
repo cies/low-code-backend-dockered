@@ -1,10 +1,20 @@
 low-code-backend-dockered
 =========================
 
-This repo contains a Elm-Hasura starter kit for rapid+typesafe web application development on open source foundations.
+Starter kit for rapid+typesafe web application development on open source foundations.
 
-Elm is great!
-But what do you run server-side?
+Features:
+
+* Postgres as the primary data store.
+* ZomboDB adds auto-synced full text search (including fuzzy matching and suggestions) to Postgres.
+* Hasura to manage permissions, database migrations and allow interaction with the data by a GraphQL interface.
+* Elm with [elm-graphql]() to demo the joy of type safe queries in the front end.
+
+All together its a workflow that allows all effort to be focused in:
+
+* setting up database structure and permission (mostly no-code experience)
+* UX design and implementation (as exmaple in web UI Elm is provided)
+
 Server-side updates may change the API and therefor break your app.
 Using [elm-graphql](https://package.elm-lang.org/packages/dillonkearns/elm-graphql/latest)
 and [Hasura](https://hasura.io) we can generate an Elm GraphQL client that exactly fits your data model.
