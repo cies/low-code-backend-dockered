@@ -35,7 +35,7 @@ services:
       - "hasura"
 
   hasura:
-    image: hasura/graphql-engine:v2.0.0-alpha.7.cli-migrations-v3
+    image: graphql-engine:v2.0.7.cli-migrations-v3
     ports:
       - "8080:8080"
       - "9695:9695"
