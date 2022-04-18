@@ -1,5 +1,5 @@
-meili/data.ms
 postgres/db_data
+elasticsearch/data
 .idea/
 *.kate-swp
 nginx-le/ssl

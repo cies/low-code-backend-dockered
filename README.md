@@ -6,20 +6,22 @@ Starter kit for rapid+typesafe web application development on open source founda
 Features:
 
 * Postgres as the primary data store.
-* ZomboDB adds auto-synced full text search (including fuzzy matching and suggestions) to Postgres.
-* Hasura to manage permissions, database migrations and allow interaction with the data by a GraphQL interface.
-* Elm with [elm-graphql]() to demo the joy of type safe queries in the front end.
+* ZomboDB adds auto-synced full text search (including fuzzy matching and suggestions) to Postgres, by bridging to ElasticSearch.
+* Hasura to manage permissions (and usage limits), database migrations and provide GraphQL interface. Basically removing the need for server-side controller logic.
+* Elm with [elm-graphql](https://github.com/jamesmacaulay/elm-graphql) to demo the joy of type safe queries in the front end.
 
 All together its a workflow that allows all effort to be focused in:
 
 * setting up database structure and permission (mostly no-code experience)
 * UX design and implementation (as exmaple in web UI Elm is provided)
 
-Server-side updates may change the API and therefor break your app.
+Server-side updates may change the API and therefor break your app if the exact GraphQL spec is not enforced.
 Using [elm-graphql](https://package.elm-lang.org/packages/dillonkearns/elm-graphql/latest)
-and [Hasura](https://hasura.io) we can generate an Elm GraphQL client that exactly fits your data model.
-After changing the database schema simply regenerate the client code.
-Any errors resulting from your change show up as errors in your IDE.
+and [Hasura](https://hasura.io) we can generate an Elm GraphQL client that exactly fits your data model,
+and thus only allows valid queries to be expressed in Elm.
+After changing the database schema simply regenerate the Elm GraphQL client library code.
+Any errors resulting from your change are now compile errors and should show up as such in your IDE.
+Good stuff.
 
 Stop writing/debugging layers of error-prone boilerplate and focus on cranking out features!
 

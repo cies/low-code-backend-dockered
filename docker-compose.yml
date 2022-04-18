@@ -35,7 +35,7 @@ services:
       - "hasura"
 
   hasura:
-    image: graphql-engine:v2.0.7.cli-migrations-v3
+    image: graphql-engine:v2.5.0
     ports:
       - "8080:8080"
       - "9695:9695"
@@ -73,7 +73,7 @@ services:
       - "elasticsearch"
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.14.0
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.2 # only 7.x is supported by ZomboDB as of apr'22
     ports: 
     - "9200:9200"
     - "9300:9300"
